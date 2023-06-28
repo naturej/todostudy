@@ -1,8 +1,33 @@
+import BtnBox from "components/box/btn-box";
+import { useTodoStore } from "context/todo";
 import styled from "styled-components";
 
-const AddModal = ({ setIsAddModalShow, handleAddTodo }) => {
+const AddModal = ({ setIsAddModalShow }) => {
+  const [todoList, setTodoList] = useTodoStore();
+
   const handleClose = () => {
     setIsAddModalShow(false);
+  };
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+
+    const title = e.target.title.value;
+    const content = e.target.content.value;
+
+    if (!title) return alert("제목을 입력해주세요");
+
+    const newTodo = {
+      id: Math.floor(Math.random() * 100000),
+      title,
+      content,
+      state: false,
+    };
+
+    setTodoList([newTodo, ...todoList]);
+    setIsAddModalShow(false);
+    e.target.title.value = "";
+    e.target.content.value = "";
   };
 
   return (
@@ -12,12 +37,12 @@ const AddModal = ({ setIsAddModalShow, handleAddTodo }) => {
           <h2>할 일 추가하기</h2>
           <input type="text" name="title" placeholder="제목" />
           <textarea name="content" placeholder="내용"></textarea>
-          <S.BtnArea>
+          <BtnBox>
             <button type="submit">추가</button>
             <button type="button" onClick={handleClose}>
               취소
             </button>
-          </S.BtnArea>
+          </BtnBox>
         </S.FlexColumnBox>
       </form>
     </S.FlexColumnBoxWrapper>
@@ -51,18 +76,7 @@ const FlexColumnBox = styled.div`
   }
 `;
 
-const BtnArea = styled.div`
-  display: flex;
-  gap: 10px;
-  & > button {
-    flex: auto;
-    padding: 12px;
-    border: 1px solid #999;
-  }
-`;
-
 const S = {
   FlexColumnBoxWrapper,
   FlexColumnBox,
-  BtnArea,
 };
