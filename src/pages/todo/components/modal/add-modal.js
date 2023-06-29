@@ -1,9 +1,9 @@
 import BtnBox from "components/box/btn-box";
-import { useTodoStore } from "context/todo";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const AddModal = ({ setIsAddModalShow }) => {
-  const { dispatch } = useTodoStore();
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setIsAddModalShow(false);

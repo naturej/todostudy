@@ -1,5 +1,3 @@
-import { createContext, useContext, useReducer } from "react";
-
 const initialValue = [
   {
     id: 1,
@@ -21,10 +19,7 @@ const initialValue = [
   },
 ];
 
-const TodoStore = createContext();
-export const useTodoStore = () => useContext(TodoStore);
-
-const todoReducer = (state, action) => {
+const todoReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [action.payload, ...state];
@@ -47,13 +42,4 @@ const todoReducer = (state, action) => {
   }
 };
 
-const TodoStoreProvider = ({ children }) => {
-  const [todoList, dispatch] = useReducer(todoReducer, initialValue);
-  return (
-    <TodoStore.Provider value={{ todoList, dispatch }}>
-      {children}
-    </TodoStore.Provider>
-  );
-};
-
-export default TodoStoreProvider;
+export default todoReducer;

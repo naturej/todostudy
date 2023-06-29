@@ -1,11 +1,11 @@
-import { useTodoStore } from "context/todo";
+import { useDispatch } from "react-redux";
 import useInput from "hooks/use-input";
 import { useState } from "react";
 import styled from "styled-components";
 
 const OneTodo = ({ todo }) => {
   const { id, title, content, state } = todo;
-  const { dispatch } = useTodoStore();
+  const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
   const [editContent, setEditContent] = useInput(content);
 

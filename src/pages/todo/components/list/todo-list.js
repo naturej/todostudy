@@ -1,8 +1,8 @@
-import { useTodoStore } from "context/todo";
+import { useSelector } from "react-redux";
 import OneTodo from "./one-todo";
 
 const TodoList = () => {
-  const { todoList } = useTodoStore();
+  const todoList = useSelector((state) => state.todoReducer);
 
   return (
     <ul>
