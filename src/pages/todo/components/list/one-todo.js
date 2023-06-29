@@ -5,39 +5,32 @@ import styled from "styled-components";
 
 const OneTodo = ({ todo }) => {
   const { id, title, content, state } = todo;
-  const [todoList, setTodoList] = useTodoStore();
+  const { dispatch } = useTodoStore();
   const [isEditMode, setIsEditMode] = useState(false);
   const [editContent, setEditContent] = useInput(content);
 
   const handleUpdateTodo = () => {
     // Todo 수정
     if (!isEditMode) return setIsEditMode(true);
-    const _todoList = [...todoList];
-    const editTodo = _todoList.find((todo) => todo.id === id);
-    editTodo.content = editContent;
-    setTodoList(_todoList);
+    dispatch({ type: "UPDATE_TODO", payload: { id, content: editContent } });
     setIsEditMode(false);
   };
 
-  const handleUpdateStateTodo = () => {
+  const handleCompleteTodo = () => {
     // Todo 상태 토글
-    const _todoList = [...todoList];
-    const editTodo = _todoList.find((todo) => todo.id === id);
-    editTodo.state = !state;
-    setTodoList(_todoList);
+    dispatch({ type: "COMPLETE_TODO", payload: { id } });
   };
 
   const handleDeleteTodo = () => {
     // Todo 삭제
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      const _todoList = todoList.filter((todo) => todo.id !== id);
-      setTodoList(_todoList);
+      dispatch({ type: "DELETE_TODO", payload: { id } });
     }
   };
 
   return (
     <S.FlexBox state={state}>
-      <input type="checkbox" checked={state} onChange={handleUpdateStateTodo} />
+      <input type="checkbox" checked={state} onChange={handleCompleteTodo} />
       <h4>{title}</h4>
       {isEditMode ? (
         <textarea value={editContent} onChange={setEditContent}></textarea>

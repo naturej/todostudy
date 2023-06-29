@@ -2,7 +2,7 @@ import { useTodoStore } from "context/todo";
 import OneTodo from "./one-todo";
 
 const TodoList = () => {
-  const [todoList, setTodoList] = useTodoStore();
+  const { todoList } = useTodoStore();
 
   return (
     <ul>

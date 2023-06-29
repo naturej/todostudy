@@ -3,7 +3,7 @@ import { useTodoStore } from "context/todo";
 import styled from "styled-components";
 
 const AddModal = ({ setIsAddModalShow }) => {
-  const [todoList, setTodoList] = useTodoStore();
+  const { dispatch } = useTodoStore();
 
   const handleClose = () => {
     setIsAddModalShow(false);
@@ -24,7 +24,7 @@ const AddModal = ({ setIsAddModalShow }) => {
       state: false,
     };
 
-    setTodoList([newTodo, ...todoList]);
+    dispatch({ type: "ADD_TODO", payload: newTodo });
     setIsAddModalShow(false);
     e.target.title.value = "";
     e.target.content.value = "";
