@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import useInput from "hooks/use-input";
 import { useState } from "react";
 import styled from "styled-components";
+import { updateTodo, completeTodo, deleteTodo } from "reducer/todoSlice";
 
 const OneTodo = ({ todo }) => {
   const { id, title, content, state } = todo;
@@ -12,19 +13,19 @@ const OneTodo = ({ todo }) => {
   const handleUpdateTodo = () => {
     // Todo 수정
     if (!isEditMode) return setIsEditMode(true);
-    dispatch({ type: "UPDATE_TODO", payload: { id, content: editContent } });
+    dispatch(updateTodo({ id, content: editContent }));
     setIsEditMode(false);
   };
 
   const handleCompleteTodo = () => {
     // Todo 상태 토글
-    dispatch({ type: "COMPLETE_TODO", payload: { id } });
+    dispatch(completeTodo({ id }));
   };
 
   const handleDeleteTodo = () => {
     // Todo 삭제
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch({ type: "DELETE_TODO", payload: { id } });
+      dispatch(deleteTodo({ id }));
     }
   };
 

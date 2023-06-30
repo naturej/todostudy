@@ -1,5 +1,6 @@
 import BtnBox from "components/box/btn-box";
 import { useDispatch } from "react-redux";
+import { addTodo } from "reducer/todoSlice";
 import styled from "styled-components";
 
 const AddModal = ({ setIsAddModalShow }) => {
@@ -24,7 +25,7 @@ const AddModal = ({ setIsAddModalShow }) => {
       state: false,
     };
 
-    dispatch({ type: "ADD_TODO", payload: newTodo });
+    dispatch(addTodo(newTodo));
     setIsAddModalShow(false);
     e.target.title.value = "";
     e.target.content.value = "";

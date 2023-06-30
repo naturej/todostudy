@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import todoReducer from "./todoSlice";
+import { todoSlice } from "./todoSlice";
 
-export const rootReducer = combineReducers({ todoReducer });
+export const rootReducer = combineReducers({ todo: todoSlice.reducer });

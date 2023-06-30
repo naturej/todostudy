@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import OneTodo from "./one-todo";
 
 const TodoList = () => {
-  const todoList = useSelector((state) => state.todoReducer);
+  const todoList = useSelector((state) => state.todo.todoList);
 
   return (
     <ul>
