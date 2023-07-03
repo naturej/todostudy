@@ -3,6 +3,7 @@ import TodoList from "./components/list/todo-list";
 import AddModal from "./components/modal/add-modal";
 import styled from "styled-components";
 import BtnBox from "components/box/btn-box";
+import FlexColumnBox from "components/box/flex-column-box";
 
 const TodoListPage = () => {
   const [isAddModalShow, setIsAddModalShow] = useState(false);
@@ -12,7 +13,7 @@ const TodoListPage = () => {
   };
 
   return (
-    <S.Wrapper>
+    <FlexColumnBox title={"할 일 목록"}>
       <S.ScrollDiv>
         <TodoList />
       </S.ScrollDiv>
@@ -20,16 +21,11 @@ const TodoListPage = () => {
         <button onClick={handleShowModal}>할 일 추가</button>
       </BtnBox>
       {isAddModalShow && <AddModal setIsAddModalShow={setIsAddModalShow} />}
-    </S.Wrapper>
+    </FlexColumnBox>
   );
 };
 
 export default TodoListPage;
-
-const Wrapper = styled.div`
-  margin: 100px auto;
-  max-width: 500px;
-`;
 
 const ScrollDiv = styled.div`
   max-height: 400px;
@@ -37,6 +33,5 @@ const ScrollDiv = styled.div`
 `;
 
 const S = {
-  Wrapper,
   ScrollDiv,
 };

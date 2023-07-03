@@ -1,4 +1,5 @@
 import BtnBox from "components/box/btn-box";
+import FlexColumnBox from "components/box/flex-column-box";
 import { useDispatch } from "react-redux";
 import { addTodo } from "reducer/todoSlice";
 import styled from "styled-components";
@@ -32,10 +33,9 @@ const AddModal = ({ setIsAddModalShow }) => {
   };
 
   return (
-    <S.FlexColumnBoxWrapper>
+    <S.DimmedBoxWrapper>
       <form onSubmit={handleAddTodo}>
-        <S.FlexColumnBox>
-          <h2>할 일 추가하기</h2>
+        <FlexColumnBox title={"할 일 추가하기"}>
           <input type="text" name="title" placeholder="제목" />
           <textarea name="content" placeholder="내용"></textarea>
           <BtnBox>
@@ -44,15 +44,15 @@ const AddModal = ({ setIsAddModalShow }) => {
               취소
             </button>
           </BtnBox>
-        </S.FlexColumnBox>
+        </FlexColumnBox>
       </form>
-    </S.FlexColumnBoxWrapper>
+    </S.DimmedBoxWrapper>
   );
 };
 
 export default AddModal;
 
-const FlexColumnBoxWrapper = styled.div`
+const DimmedBoxWrapper = styled.div`
   position: fixed;
   inset: 0;
   display: flex;
@@ -61,23 +61,6 @@ const FlexColumnBoxWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const FlexColumnBox = styled.div`
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  gap: 10px;
-  border: 1px solid #bebebe;
-  background-color: #fff;
-
-  & > input,
-  textarea {
-    padding: 12px 20px;
-    border: 1px solid #999;
-  }
-`;
-
 const S = {
-  FlexColumnBoxWrapper,
-  FlexColumnBox,
+  DimmedBoxWrapper,
 };
