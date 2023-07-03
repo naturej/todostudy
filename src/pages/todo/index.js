@@ -13,7 +13,7 @@ const TodoListPage = () => {
   };
 
   return (
-    <FlexColumnBox title={"할 일 목록"}>
+    <FlexColumnBox title={"할 일 목록 📝"}>
       <S.ScrollDiv>
         <TodoList />
       </S.ScrollDiv>

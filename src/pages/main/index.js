@@ -11,19 +11,23 @@ const MainPage = () => {
     <FlexColumnBox title={isFormLogin ? "LOG IN" : "JOIN"}>
       <LoginTab>
         <div
-          className={isFormLogin && "active"}
+          className={isFormLogin ? "active" : ""}
           onClick={() => setIsFormLogin(true)}
         >
           로그인
         </div>
         <div
-          className={!isFormLogin && "active"}
+          className={!isFormLogin ? "active" : ""}
           onClick={() => setIsFormLogin(false)}
         >
           회원가입
         </div>
       </LoginTab>
-      {isFormLogin ? <LogInForm /> : <JoinForm />}
+      {isFormLogin ? (
+        <LogInForm />
+      ) : (
+        <JoinForm setIsFormLogin={setIsFormLogin} />
+      )}
     </FlexColumnBox>
   );
 };
@@ -36,7 +40,7 @@ const LoginTab = styled.div`
   & > div {
     flex: auto;
     padding: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     text-align: center;
     background-color: #f0f0f0;
     border-bottom: 1px solid #aaa;

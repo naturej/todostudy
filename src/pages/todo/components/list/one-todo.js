@@ -31,15 +31,21 @@ const OneTodo = ({ todo }) => {
 
   return (
     <S.FlexBox state={state}>
-      <input type="checkbox" checked={state} onChange={handleCompleteTodo} />
-      <h4>{title}</h4>
-      {isEditMode ? (
-        <textarea value={editContent} onChange={setEditContent}></textarea>
-      ) : (
-        <p>{content}</p>
-      )}
-      <button onClick={handleUpdateTodo}>내용 수정</button>
-      <button onClick={handleDeleteTodo}>삭제</button>
+      <div className="checkDiv">
+        <input type="checkbox" checked={state} onChange={handleCompleteTodo} />
+      </div>
+      <div className="contentDiv">
+        <h4>{title}</h4>
+        {isEditMode ? (
+          <textarea value={editContent} onChange={setEditContent}></textarea>
+        ) : (
+          <p>{content}</p>
+        )}
+      </div>
+      <div className="btnDiv">
+        <button onClick={handleUpdateTodo}>내용 수정</button>
+        <button onClick={handleDeleteTodo}>삭제</button>
+      </div>
     </S.FlexBox>
   );
 };
@@ -49,14 +55,40 @@ export default OneTodo;
 const FlexBox = styled.div`
   position: relative;
   display: flex;
+  width: 100%;
   align-items: center;
   gap: 20px;
 
+  .checkDiv {
+    min-width: 20px;
+  }
+
+  .contentDiv {
+    flex-grow: 1;
+    h4 {
+      margin: 8px 0 0;
+    }
+    textarea {
+      width: 100%;
+    }
+    p {
+      margin: 8px 0;
+      word-break: break-word;
+    }
+  }
+
+  .btnDiv {
+    display: flex;
+    min-width: 120px;
+    gap: 10px;
+  }
+
   h4 {
-    color: ${({ state }) => (state ? "#888" : "#333")};
+    color: ${({ state }) => (state ? "#999" : "#333")};
+    text-decoration: ${({ state }) => (state ? "line-through" : "")};
   }
   p {
-    color: #888;
+    color: #999;
   }
 `;
 

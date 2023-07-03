@@ -35,12 +35,12 @@ const AddModal = ({ setIsAddModalShow }) => {
   return (
     <S.DimmedBoxWrapper>
       <form onSubmit={handleAddTodo}>
-        <FlexColumnBox title={"할 일 추가하기"}>
+        <FlexColumnBox title={"할 일 추가하기 🌟"}>
           <input type="text" name="title" placeholder="제목" />
           <textarea name="content" placeholder="내용"></textarea>
           <BtnBox>
             <button type="submit">추가</button>
-            <button type="button" onClick={handleClose}>
+            <button type="button" className="cancel" onClick={handleClose}>
               취소
             </button>
           </BtnBox>

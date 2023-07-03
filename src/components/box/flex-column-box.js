@@ -12,13 +12,14 @@ const FlexColumnBox = ({ title, children }) => {
 export default FlexColumnBox;
 
 const FlexColumnArea = styled.div`
-  width: 400px;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 20px 30px 40px;
   gap: 10px;
   border: 1px solid #bebebe;
   background-color: #fff;
+  box-sizing: border-box;
 
   & form {
     display: flex;
@@ -26,9 +27,10 @@ const FlexColumnArea = styled.div`
 
     & input,
     textarea {
-      padding: 12px 20px;
+      padding: 16px 20px;
       margin: 0 0 8px;
       border: 1px solid #999;
+      border-radius: 4px;
       ::placeholder {
         color: #999;
       }
