@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import axios from "axios";
+import { axiosInstance } from "apis/core";
+import TodoApi from "apis/todo.api";
 
 const initialState = {
   todoList: [],
@@ -37,7 +37,7 @@ export const todoSlice = createSlice({
       state.addTodoState.err = null;
     });
     builder.addCase(addTodo.fulfilled, (state, action) => {
-      state.todoList.unshift(action.payload);
+      // state.todoList.unshift(action.payload);
       state.addTodoState.loading = false;
       state.addTodoState.done = true;
       state.addTodoState.err = null;
@@ -47,46 +47,34 @@ export const todoSlice = createSlice({
       state.addTodoState.done = true;
       state.addTodoState.err = action.payload;
     });
-    builder.addCase(updateTodo.fulfilled, (state, action) => {
-      const { id, content, state: todoState } = action.payload;
-      const todo = state.todoList.find((todo) => todo.id === id);
-      todo.content = content;
-      todo.state = todoState;
-    });
-    builder.addCase(deleteTodo.fulfilled, (state, action) => {
-      const deleteIndex = state.todoList.findIndex(
-        (todo) => todo.id === action.payload
-      );
-      state.todoList.splice(deleteIndex, 1);
-    });
   },
 });
 
 export const addTodo = createAsyncThunk(
   "todo/addTodo",
   async ({ title, content }) => {
-    const res = await axios.post("/api/todo", { title, content });
-    return res.data;
+    const res = await TodoApi.addTodo(title, content);
+    return res.data.data;
   }
 );
 
 export const getTodo = createAsyncThunk("todo/getTodo", async () => {
-  const res = await axios.get("/api/todo");
-  return res.data;
+  const res = await TodoApi.getTodo();
+  return res.data.data;
 });
 
 export const updateTodo = createAsyncThunk(
   "todo/updateTodo",
   async ({ id, content, state }) => {
-    const res = await axios.put(`/api/todo/${id}`, { content, state });
-    return res.data;
+    const res = await TodoApi.updateTodo(id, content, state);
+    return res.data.data;
   }
 );
 
 export const deleteTodo = createAsyncThunk(
   "todo/deleteTodo",
   async ({ id }) => {
-    const res = await axios.delete(`/api/todo/${id}`);
-    return res.data;
+    const res = await TodoApi.deleteTodo(id);
+    return res.data.data;
   }
 );

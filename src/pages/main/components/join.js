@@ -1,3 +1,4 @@
+import AuthApi, { login } from "apis/auth.api";
 import BtnBox from "components/box/btn-box";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -26,14 +27,27 @@ const JoinForm = ({ setIsFormLogin }) => {
   );
 
   // 회원가입 버튼 클릭 시
-  const onSubmitJoinForm = (data) => {
+  const onSubmitJoinForm = async (data) => {
     if (data.email === "") return alert("이메일을 입력해주세요.");
     if (data.password === "") return alert("비밀번호를 입력해주세요.");
     if (data.passwordConfirm === "")
       return alert("비밀번호 확인을 입력해주세요.");
 
-    alert("회원가입이 완료되었습니다.");
-    setIsFormLogin(true);
+    try {
+      const res = await AuthApi.login(data.email, data.password);
+
+      if (res.data.message) {
+        alert(res.data.data);
+      }
+      setIsFormLogin(true);
+    } catch (err) {
+      if (err.response.status === 400) {
+        alert(err.response.data.error);
+      } else {
+        alert("작업중 오류가 발생했습니다.");
+        // console.error(err);
+      }
+    }
   };
 
   return (

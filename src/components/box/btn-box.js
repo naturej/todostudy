@@ -14,7 +14,8 @@ const BtnArea = styled.div`
     flex: auto;
     padding: 16px;
     color: #fff;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     border: 1px solid #5c5ad9;
     background-color: #5c5ad9;
     border-radius: 4px;
@@ -27,8 +28,9 @@ const BtnArea = styled.div`
     }
 
     &.disabled {
-      cursor: not-allowed;
+      cursor: default;
       color: #999;
+      font-weight: 400;
       border: 1px solid #aaa;
       background-color: #f0f0f0;
     }
