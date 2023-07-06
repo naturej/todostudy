@@ -1,7 +1,7 @@
 import BtnBox from "components/box/btn-box";
 import FlexColumnBox from "components/box/flex-column-box";
 import { useDispatch } from "react-redux";
-import { addTodo } from "reducer/todoSlice";
+import { addTodo, getTodo } from "reducer/todoSlice";
 import styled from "styled-components";
 
 const AddModal = ({ setIsAddModalShow }) => {
@@ -11,7 +11,7 @@ const AddModal = ({ setIsAddModalShow }) => {
     setIsAddModalShow(false);
   };
 
-  const handleAddTodo = (e) => {
+  const handleAddTodo = async (e) => {
     e.preventDefault();
 
     const title = e.target.title.value;
@@ -26,7 +26,8 @@ const AddModal = ({ setIsAddModalShow }) => {
       state: false,
     };
 
-    dispatch(addTodo(newTodo));
+    await dispatch(addTodo(newTodo));
+    dispatch(getTodo());
     setIsAddModalShow(false);
     e.target.title.value = "";
     e.target.content.value = "";

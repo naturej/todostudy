@@ -2,6 +2,7 @@ import Layout from "components/layout";
 import MainPage from "pages/main";
 import TodoListPage from "pages/todo";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./private";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,13 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "/todo/list",
-        element: <TodoListPage />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/todo/list",
+            element: <TodoListPage />,
+          },
+        ],
       },
     ],
   },

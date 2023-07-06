@@ -1,4 +1,4 @@
-import AuthApi, { login } from "apis/auth.api";
+import AuthApi from "apis/auth.api";
 import BtnBox from "components/box/btn-box";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -34,7 +34,7 @@ const JoinForm = ({ setIsFormLogin }) => {
       return alert("비밀번호 확인을 입력해주세요.");
 
     try {
-      const res = await AuthApi.login(data.email, data.password);
+      const res = await AuthApi.join(data.email, data.password);
 
       if (res.data.message) {
         alert(res.data.data);

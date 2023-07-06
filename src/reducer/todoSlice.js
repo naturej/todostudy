@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "apis/core";
 import TodoApi from "apis/todo.api";
 
 const initialState = {
@@ -66,15 +65,13 @@ export const getTodo = createAsyncThunk("todo/getTodo", async () => {
 export const updateTodo = createAsyncThunk(
   "todo/updateTodo",
   async ({ id, content, state }) => {
-    const res = await TodoApi.updateTodo(id, content, state);
-    return res.data.data;
+    await TodoApi.updateTodo(id, content, state);
   }
 );
 
 export const deleteTodo = createAsyncThunk(
   "todo/deleteTodo",
   async ({ id }) => {
-    const res = await TodoApi.deleteTodo(id);
-    return res.data.data;
+    await TodoApi.deleteTodo(id);
   }
 );

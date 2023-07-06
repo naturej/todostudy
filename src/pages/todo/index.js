@@ -4,6 +4,7 @@ import AddModal from "./components/modal/add-modal";
 import styled from "styled-components";
 import BtnBox from "components/box/btn-box";
 import FlexColumnBox from "components/box/flex-column-box";
+import AuthApi from "apis/auth.api";
 
 const TodoListPage = () => {
   const [isAddModalShow, setIsAddModalShow] = useState(false);
@@ -12,8 +13,15 @@ const TodoListPage = () => {
     setIsAddModalShow(true);
   };
 
+  const handleLogout = () => {
+    AuthApi.logout();
+    localStorage.removeItem("accessToken");
+    window.location.reload();
+  };
+
   return (
     <FlexColumnBox title={"할 일 목록 📝"}>
+      <S.LogoutBtn onClick={handleLogout}>로그아웃</S.LogoutBtn>
       <S.ScrollDiv>
         <TodoList />
       </S.ScrollDiv>
@@ -32,6 +40,16 @@ const ScrollDiv = styled.div`
   overflow-y: scroll;
 `;
 
+const LogoutBtn = styled.div`
+  font-size: 14px;
+  color: #999;
+  position: absolute;
+  top: 48px;
+  right: 30px;
+  cursor: pointer;
+`;
+
 const S = {
   ScrollDiv,
+  LogoutBtn,
 };

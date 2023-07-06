@@ -15,6 +15,7 @@ const BtnArea = styled.div`
     padding: 16px;
     color: #fff;
     font-size: 16px;
+    font-family: "Noto Sans CJK KR";
     font-weight: 600;
     border: 1px solid #5c5ad9;
     background-color: #5c5ad9;

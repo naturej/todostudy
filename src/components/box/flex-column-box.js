@@ -13,6 +13,7 @@ export default FlexColumnBox;
 
 const FlexColumnArea = styled.div`
   width: 500px;
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 20px 30px 40px;
